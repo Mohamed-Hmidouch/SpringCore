@@ -1,0 +1,39 @@
+services:
+  db:
+    image: postgres:15
+    container_name: spring_postgres
+    environment:
+      POSTGRES_USER: spring
+      POSTGRES_PASSWORD: springpass
+      POSTGRES_DB: springdb
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  pgadmin:
+    image: dpage/pgadmin4:7
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - '5050:80'
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
+
+  web:
+    build: .
+    image: spring-core-tomcat
+    container_name: spring_tomcat
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  pgadmin-data:
+
