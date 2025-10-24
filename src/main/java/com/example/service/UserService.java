@@ -28,9 +28,9 @@ public class UserService {
         if (id != null) {
             User existingUser = userRepository.findById(id).orElse(null);
             if (existingUser != null) {
-                existingUser.setUsername(user.getUsername());
-                existingUser.setPassword(user.getPassword());
-                existingUser.setEmail(user.getEmail());
+                if(user.getUsername() != null) existingUser.setUsername(user.getUsername());
+                if(user.getEmail() != null) existingUser.setEmail(user.getEmail());
+                if(user.getPassword() != null) existingUser.setPassword(user.getPassword());
                 return userRepository.save(existingUser);
             }
         }
@@ -43,5 +43,9 @@ public class UserService {
 
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
+    }
+
+    public Long countUsers(){
+        return userRepository.countUsers();
     }
 }

@@ -98,6 +98,13 @@
       <artifactId>hibernate-validator</artifactId>
       <version>8.0.1.Final</version>
     </dependency>
+    <!-- Spring Boot devtools (development only) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <version>3.3.0</version>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- Jakarta Servlet & JPA APIs -->
     <dependency>
